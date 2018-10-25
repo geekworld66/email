@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<style>
+  body,html{overflow:auto;}
+  #Nsfocus_Alert_Email_tab td{padding:0px!important;}
+  #Nsfocus_Alert_Email_tab img{display:block;}
+  #Nsfocus_Alert_Email_tab img,#Nsfocus_Alert_Email_tab a{border:none;padding:0;margin:0;}
+  .TextStrong{color:#444;}
+  .Alert_Email_tab{border-collapse:collapse;border:1px solid #9dd255;font-size:12px;}
+  .Alert_Email_tab th{border:1px solid #9dd255;}
+  .Alert_Email_tab td{border:1px solid #9dd255;}
+  html {overflow-y:scroll;}
+  .websafe-td-operation a {color: #50a9b5;}
+  .websafe_word_wrap {word-wrap: break-word; word-break: break-all;}
+  .websafe_tr { text-align: center;}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div style="margin-left:100px;width:700px;background:#dff0cc;color:#444;font-size:12px;">
+    <table width="700" border="0" cellspacing="0" cellpadding="0" id="Nsfocus_Alert_Email_tab" bgcolor="#dff0cc">
+        <tr>
+            <td width="22">&nbsp;</td>
+            <td width="656" style="padding:20px 0 18px;">
+                <a href="#"><img src="cid:Alert_Email_logo.gif" width="243" height="34" />
+                </a>
+            </td>
+            <td width="22">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <table width="656" border="0" cellspacing="0" cellpadding="0" style="background:#fff;font-size:12px;">
+                    <tr>
+                        <td width="26" height="17" align="left" valign="top"><img src="cid:Alert_Email_topLeft_bg.gif" width="26" height="17" />
+                        </td>
+                        <td></td>
+                        <td width="21" height="17" align="right" valign="top"><img src="cid:Alert_Email_topRight_bg.gif" width="21" height="17" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <table width="609" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;font-size:12px;">
+                                <tr>
+                                  <td height="22" colspan="2" style="width:580px;word-wrap:break-word;word-break:break-all;">
+                                      <b style="color:#444;">NTIP情报订阅每日监控结果通知</b>
+                                  </td>
+                                </tr>
+                                <tr>
+                                    <td height="22" colspan="2">
+                                        <b style="color:#444;">检测时间：</b><span style="color:#fd8700;">{{event.alert_time}}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="left" valign="top"><img src="cid:Alert_Email_bottomLeft_bg.gif" width="26" height="19" />
+                        </td>
+                        <td valign="top"><img src="cid:Alert_Email_bottomMiddle_bg.gif" width="609" height="19" />
+                        </td>
+                        <td align="right" valign="top"><img src="cid:Alert_Email_bottomRight_bg.gif" width="21" height="19" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td height="10">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <table width="656" border="0" cellspacing="0" cellpadding="0" style="background:#fff;font-size:12px;">
+                    <tr>
+                        <td width="26" height="17" align="left" valign="top"><img src="cid:Alert_Email_topLeft_bg.gif" width="26" height="17" />
+                        </td>
+                        <td></td>
+                        <td width="21" height="17" align="right" valign="top"><img src="cid:Alert_Email_topRight_bg.gif" width="21" height="17" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td style="padding-bottom:15px;">
+                            <table class="websafe_word_wrap" width="609" border="0" cellspacing="0" cellpadding="0" style="font-size:12px;">
+                                <tr>
+                                    <td colspan="3" style="border-bottom:1px solid #479222;padding:3px 0;padding-left:3px;">
+                                        <b style="color:#479222">事件详情</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        {% if event_detail.ips_info %}
+                                        <div>
+                                            <span>新发现威胁IP</span>
+                                            <table cellspacing="0" width="100%" cellpadding="0" class="Alert_Email_tab" style="font-size:12px;" >
+                                                <tr>
+                                                    <th width="12%" style="text-align: center;">序号</th>
+                                                    <th width="20%" style="text-align: center;">IP</th>
+                                                    <th width="25%" style="text-align: center;">时间</th>
+                                                    <th width="42%" style="text-align: center;">威胁类型</th>
+                                                </tr>
+                                                {% for info in event_detail.ips_info %}
+                                                    <tr class="websafe_word_wrap websafe_tr">
+                                                        <td>{{ loop.index }}</td>
+                                                        <td>{{ info.ip }}</td>
+                                                        <td>{{ info.monitor_time }}</td>
+                                                        <td>{{ info.threat_type }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                        {% elif event_detail.ips_info and not event_detail.domains_info %}
+                                            <div>
+                                                <span>新发现威胁IP</span><br/>
+                                                <span>无</span>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if event_detail.domains_info %}
+                                        <div>
+                                            <br>
+                                            <span>新发现威胁域名</span>
+                                            <table cellspacing="0" width="100%" cellpadding="0" class="Alert_Email_tab" style="font-size:12px;" >
+                                                <tr>
+                                                    <th width="12%" style="text-align: center;">序号</th>
+                                                    <th width="20%" style="text-align: center;">域名</th>
+                                                    <th width="25%" style="text-align: center;">时间</th>
+                                                    <th width="42%" style="text-align: center;">威胁类型</th>
+                                                </tr>
+                                                {% for info in event_detail.domains_info %}
+                                                    <tr class="websafe_word_wrap websafe_tr">
+                                                        <td>{{ loop.index }}</td>
+                                                        <td>{{ info.domain }}</td>
+                                                        <td>{{ info.monitor_time }}</td>
+                                                        <td>{{ info.threat_type }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                        {% elif event_detail.ips_info and not event_detail.domains_info %}
+                                            <div>
+                                                <br>
+                                                <span>新发现威胁域名</span><br/>
+                                                <spa>无</spa>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if not event_detail.ips_info and not event_detail.domains_info %}
+                                        <div>
+                                            <span>无新发现威胁IP和域名</span>
+                                        </div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            {% if event.description %}
+                            <table width="609" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:10px;font-size:12px">
+                                <tr style="background:#dceec6;">
+                                    <td colspan="3" height="24" align="left" style="color:#8cad00;padding-left:3px;">事件备注：</td>
+                                </tr>
+                                <tr>
+                                    <td width="20">&nbsp;</td>
+                                    <td colspan="2">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="20">&nbsp;</td>
+                                    <td><div class='title2'>
+                                    {{event.description}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                            {% endif %}
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="left" valign="top"><img src="cid:Alert_Email_bottomLeft_bg.gif" width="26" height="19" /></td>
+                        <td valign="top"><img src="cid:Alert_Email_bottomMiddle_bg.gif" width="609" height="19" /></td>
+                        <td align="right" valign="top"><img src="cid:Alert_Email_bottomRight_bg.gif" width="21" height="19" /></td>
+                    </tr>
+                </table>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td height="10">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+</table>
+</div>
